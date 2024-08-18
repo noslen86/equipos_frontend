@@ -1,0 +1,96 @@
+<mat-toolbar color="warn">
+  <mat-toolbar-row class="justify-content-between">
+    <button mat-icon-button (click)="toggleSidebar()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+    <div class="row mr-0 ml-auto" title="Nomencladores">
+      <ul>
+        <li>
+          <button mat-button [matMenuTriggerFor]="menuNomenclators" class="user mt-2 d-flex align-items-center">
+            <mat-icon class="user-image-icon ml-1">addchart</mat-icon>
+          </button>
+          <mat-menu #menuNomenclators="matMenu">
+            <a mat-menu-item routerLink="/nom_discos_duros_marcas" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>app_registration</mat-icon>Marcas de discos duros
+            </a>
+            <a mat-menu-item routerLink="/nom_discos_duros_modelos" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>app_registration</mat-icon>Modelos de discos duros
+            </a>
+            <a mat-menu-item routerLink="/nom_discos_duros_tipos" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>app_registration</mat-icon> Tipos de discos duros
+            </a>
+            <mat-divider></mat-divider>
+            <a mat-menu-item routerLink="#" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>app_registration</mat-icon>Marcas de UPS
+            </a>
+            <a mat-menu-item routerLink="#" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>app_registration</mat-icon>Modelos de UPS
+            </a>
+            <mat-divider></mat-divider>
+            <a mat-menu-item routerLink="#" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>app_registration</mat-icon>Marcas de estabilizadores
+            </a>
+            <a mat-menu-item routerLink="#" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>app_registration</mat-icon>Modelos de estabilizadores
+            </a>
+            <mat-divider></mat-divider>
+            <a mat-menu-item routerLink="#" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>app_registration</mat-icon>Marcas de Monitores
+            </a>
+            <a mat-menu-item routerLink="#" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>app_registration</mat-icon>Modelos de Monitores
+            </a>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+    <div class="row mr-0 ml-auto" title="Piezas y accesorios">
+      <ul>
+        <li>
+          <button mat-button [matMenuTriggerFor]="menuDevices" class="user mt-2 d-flex align-items-center">
+            <mat-icon class="user-image-icon ml-1">phonelink</mat-icon>
+          </button>
+          <mat-menu #menuDevices="matMenu">
+            <a mat-menu-item routerLink="/discos-duros" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>storage</mat-icon>Discos duros
+            </a>
+            <a mat-menu-item routerLink="/memorias-ram" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>memory</mat-icon>Memorias RAM
+            </a>
+            <a mat-menu-item routerLink="/microprocesadores" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>settings</mat-icon>Microprocesadores
+            </a>
+            <a mat-menu-item routerLink="/sistemas-operativos" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>window</mat-icon>Sistemas operativos
+            </a>
+            <mat-divider></mat-divider>
+            <a mat-menu-item routerLink="/estados-tecnicos" routerLinkActive="list-item-active">
+              <mat-icon matListItemIcon>medical_services</mat-icon>Estados técnicos
+            </a>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+    <div class="row mr-0 ml-auto">
+      <ul>
+        <li>
+          <button mat-button [matMenuTriggerFor]="menuUserSettings" class="user mt-2 d-flex align-items-center">
+            <img [src]="srcUserImage" alt="" class="user-image mr-1 p-2" />
+          </button>
+          <mat-menu #menuUserSettings="matMenu">
+            <button mat-menu-item>
+              <mat-icon>account_circle</mat-icon>
+              Mi cuenta
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item>
+              <mat-icon>exit_to_app</mat-icon>
+              Cerrar sesión
+            </button>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,110 @@
+<div class="container-fluid page">
+  <div class="page__box p-3 mt-2">Discos duros</div>
+  <div class="page__content shadow-lg p-3 position-relative">
+    <div class="text-center">
+      <div *ngIf="loading else showHardDisksTable">
+        <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+      </div>
+      <ng-template #showHardDisksTable>
+        <button mat-raised-button color="warn" (click)="openHardDiskFormDialog(formHardDiskTemplate)">
+          <mat-icon>add</mat-icon>
+          Crear disco duro
+        </button>
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox></mat-checkbox>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+          <ng-container matColumnDef="capacity">
+            <th mat-header-cell *matHeaderCellDef>Capacidad</th>
+            <td mat-cell *matCellDef="let element">{{ element.capacity }}</td>
+          </ng-container>
+          <ng-container matColumnDef="brand">
+            <th mat-header-cell *matHeaderCellDef>Marca</th>
+            <td mat-cell *matCellDef="let element">{{ element.brand }}</td>
+          </ng-container>
+          <ng-container matColumnDef="model">
+            <th mat-header-cell *matHeaderCellDef>Modelo</th>
+            <td mat-cell *matCellDef="let element">{{ element.model }}</td>
+          </ng-container>
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Tipo</th>
+            <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <a [routerLink]="['detalles', element.id]">
+                <mat-icon aria-hidden="false" aria-label="" fontIcon="visibility"></mat-icon>
+              </a>&nbsp;&nbsp;
+              <a [routerLink]="['modificar', element.id]">
+                <mat-icon aria-hidden="false" aria-label="" fontIcon="edit" color="accent"></mat-icon>
+              </a>&nbsp;&nbsp;
+              <a [routerLink]="['eliminar', element.id]">
+                <mat-icon aria-hidden="false" aria-label="" fontIcon="delete" color="warn"></mat-icon>
+              </a>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayColumns"></tr>
+        </table>
+      </ng-template>
+      <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>
+
+<ng-template #formHardDiskTemplate>
+  <h1 mat-dialog-title>Nuevo Disco duro</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="hardDiskFormGroup">
+      <div style="width: 600px">
+        <mat-form-field appearance="fill" style="width: 48%">
+          <mat-label>Capacidad</mat-label>
+          <input matInput #capacity formControlName="capacity" (blur)="updateErrorMessageCapacityControl()">
+          <mat-hint>{{capacity.value.length}}/6</mat-hint>
+          @if (hardDiskFormGroup.controls['capacity'].invalid) {
+            <mat-error>{{ errorCapacityMessage }}</mat-error>
+          }
+        </mat-form-field>&nbsp;&nbsp;
+        <mat-form-field appearance="fill" style="width: 48%">
+          <mat-label>Marca</mat-label>
+          <input matInput #brand formControlName="brand" (blur)="updateErrorMessageBrandControl()">
+          <mat-hint>{{brand.value.length}}/10</mat-hint>
+          @if (hardDiskFormGroup.controls['brand'].invalid) {
+            <mat-error>{{ errorBrandMessage }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div style="width: 600px">
+        <mat-form-field appearance="fill" style="width: 48%">
+          <mat-label>Modelo</mat-label>
+          <input matInput formControlName="model">
+          <mat-hint>Este campo es opcional.</mat-hint>
+        </mat-form-field>&nbsp;&nbsp;
+        <mat-form-field appearance="fill" style="width: 48%">
+          <mat-label>Tipo</mat-label>
+          <mat-select formControlName="type" (blur)="updateErrorMessageTypeControl()">
+            <mat-option value="SSD">SSD</mat-option>
+            <mat-option value="HDD">HDD</mat-option>
+          </mat-select>
+          <mat-hint>Este campo es obligatorio</mat-hint>
+          @if (hardDiskFormGroup.controls['type'].invalid) {
+            <mat-error>{{ errorTypeMessage }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close [disabled]="hardDiskFormGroup.invalid" (click)="onCreateHardDisk()" color="primary">Aceptar</button>
+    <button mat-raised-button mat-dialog-close color="warn">Cerrar</button>
+  </div>
+</ng-template>

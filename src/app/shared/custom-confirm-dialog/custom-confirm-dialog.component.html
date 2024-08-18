@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Confirmar acción</h2>
+<mat-dialog-content>
+  <div style="display: flex; justify-content: center; align-items: center">
+    <mat-icon color="warn">feedback</mat-icon>
+  </div><br>
+  ¿Está seguro que desea eliminar {{ data.type }} {{ data.data.name }} del sistema?
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="onNoClick()">Cancelar</button>
+  <button mat-raised-button cdkFocusInitial color="warn" (click)="dialogRef.close(true)">Aceptar</button>
+</mat-dialog-actions>
